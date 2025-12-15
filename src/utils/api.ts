@@ -10,7 +10,7 @@ class API {
   async post(
     url: string,
     body: object = {},
-    response_done: (response: Response) => void = () => { },
+    response_done: (response: Response) => void = () => {},
   ) {
     const response = await fetch(url, {
       method: "POST",
@@ -40,11 +40,11 @@ export class Calendar extends API {
     super(notification);
   }
 
-  async IPO_Iposcoop(response_done: (response: Response) => void = () => { }) {
+  async IPO_Iposcoop(response_done: (response: Response) => void = () => {}) {
     return await this.post("/api/calendar/ipo/iposcoop", {}, response_done);
   }
 
-  async SPAC_Research(response_done: (response: Response) => void = () => { }) {
+  async SPAC_Research(response_done: (response: Response) => void = () => {}) {
     return await this.post("/api/calendar/spac/research", {}, response_done);
   }
 }
@@ -56,7 +56,7 @@ export class Event extends API {
 
   async Finviz(
     event: "News" | "Blogs" | "Stock" | "ETF",
-    response_done: (response: Response) => void = () => { },
+    response_done: (response: Response) => void = () => {},
     symbol: string | null = null,
   ) {
     const body = { [event]: symbol };
@@ -71,14 +71,24 @@ export class Candlestick extends API {
 
   async Finviz(
     symbol: string,
-    space: 'd1' | 'd5' | 'm1' | 'm3' | 'm6' | 'ytd' | 'y1' | 'y2' | 'y5' | 'max' = 'd1',
-    interval: 'i1' | 'i3' | 'i5' = 'i1',
-    response_done: (response: Response) => void = () => { },
+    space:
+      | "d1"
+      | "d5"
+      | "m1"
+      | "m3"
+      | "m6"
+      | "ytd"
+      | "y1"
+      | "y2"
+      | "y5"
+      | "max" = "d1",
+    interval: "i1" | "i3" | "i5" | "d1" = "i1",
+    response_done: (response: Response) => void = () => {},
   ) {
     const body = {
       symbol,
-      "space": space,
-      "interval": interval
+      space: space,
+      interval: interval,
     };
     return await this.post("/api/candlestick/finviz", body, response_done);
   }
