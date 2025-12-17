@@ -12,64 +12,34 @@
 import { useNotification } from "naive-ui";
 import { Candlestick } from "../../utils/api";
 import { onMounted, ref } from "vue";
-import {
-    type DataFromItem,
-    add_date_candlestick_series,
-    add_date_volume_series,
-    create,
-    create_candlestick_series,
-    create_volume_series,
-    data_convert,
-} from "./chart";
-import type { IChartApi, ISeriesApi } from "lightweight-charts";
+import { CandlestickChart, type DataItem } from "./candlestick_chart";
 
 const notification = useNotification();
 const candlestick = new Candlestick(notification);
-const result = ref<DataFromItem[]>([]);
+const result = ref<DataItem[]>([]);
 const container = ref();
-const input_value = ref();
-let chart: IChartApi;
-let candlestick_series: ISeriesApi<"Candlestick">;
-let volume_series: ISeriesApi<"Histogram">;
+const input_value = ref("NVDA");
+let chart: CandlestickChart;
 
 const reload = async () => {
     result.value = await candlestick.Finviz(input_value.value, "d1", "i1");
-    //添加数据
-    const data = data_convert(result.value);
-    candlestick_series.setData(add_date_candlestick_series(data));
-    volume_series.setData(add_date_volume_series(data));
-    //整理布局
-    chart.timeScale().fitContent();
+    chart.set_data(result.value);
 };
 
-onMounted(() => {
-    //创建图表
-    chart = create(container.value, {
-        layout: {
-            attributionLogo: false,
-            textColor: "white",
-            background: { color: "black" },
-        },
-        height: 300,
-        timeScale: {
-            timeVisible: true,
-        },
-    });
-    //创建蜡烛图
-    candlestick_series = create_candlestick_series(chart);
-    candlestick_series.priceScale().applyOptions({
-        scaleMargins: {
-            top: 0.1,
-            bottom: 0.4,
-        },
-    });
-    //创建成交量
-    volume_series = create_volume_series(chart);
-    volume_series.priceScale().applyOptions({
-        scaleMargins: {
-            top: 0.7,
-            bottom: 0,
-        },
-    });
-});
+onMounted(() =>
+    setTimeout(() => {
+        chart = new CandlestickChart(container.value, {
+            layout: {
+                attributionLogo: false,
+                textColor: "white",
+                background: { color: "black" },
+            },
+            height: 300,
+            timeScale: {
+                timeVisible: true,
+            },
+        });
+        chart.add_tooltip(container.value);
+    }, 1),
+);
 </script>

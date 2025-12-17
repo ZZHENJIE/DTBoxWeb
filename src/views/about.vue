@@ -19,16 +19,11 @@
             </div>
 
             <NH1 style="text-align: center; margin: 0">
-                <NText type="info">About DTBox Web</NText>
+                <NText type="info">About DTBox</NText>
             </NH1>
 
             <NCard title="Introduction" hoverable>
-                <NP>
-                    DTBox Web is the official web project of DTBox—an
-                    open-source, lightweight web application built with Naive UI
-                    + Vite + Vue 3 + TypeScript. Clean UI, readable code,
-                    contributions welcome.
-                </NP>
+                <NP></NP>
             </NCard>
 
             <NCard title="Tech Stack">
