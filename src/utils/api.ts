@@ -20,18 +20,22 @@ class API {
       body: JSON.stringify(body),
     });
     response_done(response);
-    const text = await response.text();
+    const json = await response.json();
 
     if (!response.ok) {
+      const error = json.error as string;
+      const idx = error.indexOf(":");
+      const errType = idx === -1 ? error : error.slice(0, idx);
+      const errMsg = idx === -1 ? "" : error.slice(idx + 1);
       this.notification.error({
-        title: "Fetch Error",
-        content: text,
+        title: errType,
+        content: errMsg,
         meta: new Date().toLocaleString(),
       });
       return {};
     }
 
-    return JSON.parse(text);
+    return json;
   }
 }
 
@@ -91,5 +95,35 @@ export class Candlestick extends API {
       interval: interval,
     };
     return await this.post("/api/candlestick/finviz", body, response_done);
+  }
+}
+
+export class User extends API {
+  constructor(notification: NotificationApiInjection) {
+    super(notification);
+  }
+
+  async Register(
+    name: string,
+    password: string,
+    response_done: (response: Response) => void = () => {},
+  ) {
+    const body = {
+      name,
+      password,
+    };
+    return await this.post("/api/user/register", body, response_done);
+  }
+
+  async SignIn(
+    name: string,
+    password: string,
+    response_done: (response: Response) => void = () => {},
+  ) {
+    const body = {
+      name,
+      password,
+    };
+    return await this.post("/api/user/signin", body, response_done);
   }
 }

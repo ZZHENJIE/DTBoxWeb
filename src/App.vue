@@ -41,6 +41,7 @@
                             gap: 12px;
                         "
                     >
+                        <AuthText></AuthText>
                         <NButton quaternary circle @click="change_theme">
                             <NIcon size="40">
                                 <ContrastSharp />
@@ -76,6 +77,7 @@ import { openUrl } from "./utils/tool";
 import { useRouter } from "vue-router";
 import SymbolSerach from "./components/symbol_serach.vue";
 import AboutDropdown from "./components/about_dropdown.vue";
+import AuthText from "./components/auth_text.vue";
 
 const is_dark = ref(true);
 const options = ref(Menu);

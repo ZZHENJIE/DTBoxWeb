@@ -43,6 +43,11 @@ const routes = [
     component: () => import("../views/experimental/chart.vue"),
   },
   {
+    path: "/auth",
+    name: "auth",
+    component: () => import("../views/auth/main.vue"),
+  },
+  {
     path: "/:pathMatch(.*)*",
     name: "not_found",
     component: () => import("../views/not_found.vue"),
