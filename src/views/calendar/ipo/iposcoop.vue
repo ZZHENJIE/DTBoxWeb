@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { Calendar } from "../../../utils/api";
+import Calendar from "../../../utils/api/calendar";
 import { useNotification } from "naive-ui";
 
 interface Item {

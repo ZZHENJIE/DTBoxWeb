@@ -5,7 +5,6 @@ import { NaiveUiResolver } from "unplugin-vue-components/resolvers";
 import Components from "unplugin-vue-components/vite";
 
 export default defineConfig({
-  base: "/static/",
   plugins: [
     vue(),
     AutoImport({

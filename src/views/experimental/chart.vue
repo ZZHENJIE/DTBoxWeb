@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { useNotification } from "naive-ui";
-import { Candlestick } from "../../utils/api";
+import Candlestick from "../../utils/api/candlestick";
 import { onMounted, ref } from "vue";
 import { CandlestickChart, type DataItem } from "./candlestick_chart";
 

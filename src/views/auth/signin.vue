@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { User } from "../../utils/api";
+import User from "../../utils/api/user";
 import { useNotification } from "naive-ui";
 
 const notification = useNotification();

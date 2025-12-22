@@ -33,7 +33,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { useNotification } from "naive-ui";
-import { Event } from "../utils/api";
+import Event from "../utils/api/event";
 import { openUrl } from "../utils/tool";
 
 export interface News_Item {

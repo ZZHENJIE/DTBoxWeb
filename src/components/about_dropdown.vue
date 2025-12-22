@@ -12,9 +12,13 @@ const options = ref([
         label: "Help",
         key: "help",
     },
-    {
-        label: "Version Beta 0.0.1",
-        key: "version",
-    },
 ]);
+
+fetch("/api/version").then(async (response) => {
+    const version = await response.text();
+    options.value.push({
+        label: version,
+        key: "version",
+    });
+});
 </script>
