@@ -5,7 +5,7 @@
             autocomplete: 'disabled',
         }"
         :options="options"
-        placeholder="Tests"
+        placeholder="Test"
         clearable
     ></NAutoComplete>
 </template>

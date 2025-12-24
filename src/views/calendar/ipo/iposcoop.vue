@@ -57,7 +57,7 @@ const refresh = async () => {
     const json = await calendar.IPO_Iposcoop((_) => {
         is_loading.value = false;
     });
-    result.value = json;
+    result.value = json as Item[];
 };
 
 onMounted(() => refresh());

@@ -22,7 +22,11 @@ const input_value = ref("NVDA");
 let chart: CandlestickChart;
 
 const reload = async () => {
-    result.value = await candlestick.Finviz(input_value.value, "d1", "i1");
+    result.value = (await candlestick.Finviz(
+        input_value.value,
+        "d1",
+        "i1",
+    )) as DataItem[];
     chart.set_data(result.value);
 };
 

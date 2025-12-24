@@ -1,4 +1,4 @@
-import { createWebHashHistory, createRouter } from "vue-router";
+import { createWebHistory, createRouter } from "vue-router";
 
 const routes = [
   { path: "/", name: "home", component: () => import("../views/home.vue") },
@@ -43,6 +43,11 @@ const routes = [
     component: () => import("../views/experimental/chart.vue"),
   },
   {
+    path: "/experimental/exchange_note",
+    name: "experimental_exchange_note",
+    component: () => import("../views/experimental/exchange_note.vue"),
+  },
+  {
     path: "/auth",
     name: "auth",
     component: () => import("../views/auth/main.vue"),
@@ -55,6 +60,6 @@ const routes = [
 ];
 
 export default createRouter({
-  history: createWebHashHistory("/static/"),
+  history: createWebHistory("/"),
   routes,
 });

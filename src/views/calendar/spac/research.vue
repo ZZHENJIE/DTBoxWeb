@@ -45,7 +45,7 @@ const refresh = async () => {
     const json = await calendar.SPAC_Research((_) => {
         is_loading.value = false;
     });
-    result.value = json;
+    result.value = json as Item[];
 };
 
 onMounted(() => refresh());

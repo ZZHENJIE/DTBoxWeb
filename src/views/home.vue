@@ -36,12 +36,16 @@ import { useNotification } from "naive-ui";
 import Event from "../utils/api/event";
 import { openUrl } from "../utils/tool";
 
-export interface News_Item {
+interface News_Item {
     Title: string;
     Source: string;
     Date: string;
     Url: string;
     Category: string;
+}
+
+export interface News {
+    Common: News_Item[];
 }
 
 const notification = useNotification();
@@ -50,9 +54,9 @@ const news_result = ref<News_Item[]>([]);
 const news_is_loading = ref(true);
 const news_refresh = async () => {
     news_is_loading.value = true;
-    const json = await event.Finviz("News", (_) => {
+    const json = (await event.Finviz("News", (_) => {
         news_is_loading.value = false;
-    });
+    })) as News;
     news_result.value = json.Common;
 };
 
