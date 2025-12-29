@@ -27,6 +27,15 @@ export default class User extends API {
     );
   }
 
+  async ProFile(
+    token: string,
+    response_done: (response: Response) => void = () => {},
+  ) {
+    return await this.get("/api/user/profile", {}, response_done, {
+      Authorization: `Bearer ${token}`,
+    });
+  }
+
   async SignIn(
     name: string,
     password: string,

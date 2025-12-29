@@ -11,6 +11,7 @@ export class API {
     url: string,
     params: object = {},
     response_done: (response: Response) => void = () => {},
+    headers: HeadersInit = {},
   ) {
     const new_url = new URL(url, location.origin);
     Object.entries(params).forEach(([k, v]) =>
@@ -18,6 +19,7 @@ export class API {
     );
     const response = await fetch(new_url, {
       method: "GET",
+      headers,
     });
     response_done(response);
     return this.response_done(response);
@@ -27,11 +29,13 @@ export class API {
     url: string,
     body: object = {},
     response_done: (response: Response) => void = () => {},
+    headers: HeadersInit = {},
   ) {
     const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        ...headers,
       },
       body: JSON.stringify(body),
     });

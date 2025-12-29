@@ -67,6 +67,14 @@ export default [
         label: "Chart",
         key: "/experimental/chart",
       },
+      {
+        label: "Exchange Note",
+        key: "/experimental/exchange_note",
+      },
+      {
+        label: "Cboe Book View",
+        key: "/experimental/cboe_book_view",
+      },
     ],
   },
 ];

@@ -1,5 +1,5 @@
 <template>
-    <NLayout position="absolute" content-style="padding: 24px;">
+    <NLayout position="absolute" :native-scrollbar="false" content-style="padding: 24px;">
         <div class="markdown-body" v-html="markdown"></div>
     </NLayout>
 </template>

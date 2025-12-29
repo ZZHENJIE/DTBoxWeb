@@ -22,8 +22,14 @@ const user = new User(notification);
 const name = ref();
 const password = ref();
 
+interface SI {
+    token: string;
+}
+
 const signin = async () => {
-    const result = await user.SignIn(name.value, password.value);
+    const singin_object = (await user.SignIn(name.value, password.value)) as SI;
+    const token = singin_object.token;
+    const result = await user.ProFile(token);
     console.log(result);
 };
 

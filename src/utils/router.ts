@@ -48,6 +48,11 @@ const routes = [
     component: () => import("../views/experimental/exchange_note.vue"),
   },
   {
+    path: "/experimental/cboe_book_view",
+    name: "experimental_cboe_book_view",
+    component: () => import("../views/experimental/cboe_book_view.vue"),
+  },
+  {
     path: "/auth",
     name: "auth",
     component: () => import("../views/auth/main.vue"),
