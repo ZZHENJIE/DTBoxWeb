@@ -1,0 +1,112 @@
+[
+  {
+    "key": "exch",
+    "label": "Exchange",
+    "type": "select",
+    "options": [
+      {
+        "label": "AMEX",
+        "value": "amex"
+      },
+      {
+        "label": "NASDAQ",
+        "value": "nasd"
+      },
+      {
+        "label": "NYSE",
+        "value": "nyse"
+      },
+      {
+        "label": "CBOE",
+        "value": "cboe"
+      }
+    ]
+  },
+  {
+    "key": "idx",
+    "label": "Index",
+    "type": "select",
+    "options": [
+      {
+        "label": "S&P 500",
+        "value": "sp500"
+      },
+      {
+        "label": "NASDAQ 100",
+        "value": "ndx"
+      },
+      {
+        "label": "DJIA",
+        "value": "dji"
+      },
+      {
+        "label": "RUSSELL 2000",
+        "value": "rut"
+      }
+    ]
+  },
+  {
+    "key": "sh_short",
+    "label": "Short Float",
+    "type": "value",
+    "unit": "%",
+    "options": [
+      {
+        "label": "Low (<5%)",
+        "value": "low"
+      },
+      {
+        "label": "High (>20%)",
+        "value": "high"
+      },
+      {
+        "label": "Under 5%",
+        "value": "u5"
+      },
+      {
+        "label": "Under 10%",
+        "value": "u10"
+      },
+      {
+        "label": "Under 15%",
+        "value": "u15"
+      },
+      {
+        "label": "Under 20%",
+        "value": "u20"
+      },
+      {
+        "label": "Under 25%",
+        "value": "u25"
+      },
+      {
+        "label": "Under 30%",
+        "value": "u30"
+      },
+      {
+        "label": "Over 5%",
+        "value": "o5"
+      },
+      {
+        "label": "Over 10%",
+        "value": "o10"
+      },
+      {
+        "label": "Over 15%",
+        "value": "o15"
+      },
+      {
+        "label": "Over 20%",
+        "value": "o20"
+      },
+      {
+        "label": "Over 25%",
+        "value": "o25"
+      },
+      {
+        "label": "Over 30%",
+        "value": "o30"
+      }
+    ]
+  }
+]

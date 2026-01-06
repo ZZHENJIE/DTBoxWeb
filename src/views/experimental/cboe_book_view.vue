@@ -30,12 +30,12 @@
 <script setup lang="ts">
 import { useNotification } from "naive-ui";
 import { ref } from "vue";
-import Market from "../../utils/api/Market";
+import Market from "../../utils/api/market";
 
 const markets = ref(["EDGA", "EDGK", "BYX", "BZX"]);
 const notification = useNotification();
 const market = new Market(notification);
-const result = ref([]);
+// const result = ref([]);
 const on_update = (value: "EDGA" | "EDGK" | "BYX" | "BZX") => {
     market.cboe_book_view(value);
 };
