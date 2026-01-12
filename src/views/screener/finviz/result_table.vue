@@ -1,11 +1,15 @@
 <template>
-    <NDataTable :columns="columns" :data="props.result" :bordered="false" />
+    <NDataTable
+        :columns="columns"
+        :data="data"
+        :pagination="paginationReactive"
+    />
 </template>
 
 <script setup lang="ts">
 import { NText, type DataTableColumns } from "naive-ui";
 import type { PropType } from "vue";
-import { h } from "vue";
+import { h, reactive } from "vue";
 
 interface ScreenerItem {
     "No.": number;
@@ -22,7 +26,7 @@ interface ScreenerItem {
 }
 
 const props = defineProps({
-    result: {
+    data: {
         type: Array as PropType<ScreenerItem[]>,
         required: true,
         default: () => [],
@@ -34,12 +38,12 @@ function create_columns(): DataTableColumns<ScreenerItem> {
         {
             title: "No.",
             key: "No.",
-            width: 60,
+            width: 50,
         },
         {
             title: "Symbol",
             key: "Ticker",
-            width: 90,
+            width: 80,
         },
         {
             title: "Company",
@@ -59,10 +63,12 @@ function create_columns(): DataTableColumns<ScreenerItem> {
         {
             title: "Country",
             key: "Country",
+            ellipsis: { tooltip: true },
         },
         {
             title: "Market Cap",
             key: "Market Cap",
+            ellipsis: { tooltip: true },
             render(row) {
                 const marketCap = row["Market Cap"];
                 if (marketCap == undefined) {
@@ -106,6 +112,7 @@ function create_columns(): DataTableColumns<ScreenerItem> {
         {
             title: "Volume",
             key: "Volume",
+            ellipsis: { tooltip: true },
             render(row) {
                 return row.Volume?.toLocaleString("en-US") ?? "—";
             },
@@ -113,5 +120,17 @@ function create_columns(): DataTableColumns<ScreenerItem> {
     ];
 }
 const columns = create_columns();
-// const pagination = false as const;
+const paginationReactive = reactive({
+    page: 1,
+    pageSize: 20,
+    showSizePicker: true,
+    pageSizes: [20, 40, 60],
+    onChange: (page: number) => {
+        paginationReactive.page = page;
+    },
+    onUpdatePageSize: (pageSize: number) => {
+        paginationReactive.pageSize = pageSize;
+        paginationReactive.page = 1;
+    },
+});
 </script>

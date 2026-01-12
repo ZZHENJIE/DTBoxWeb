@@ -1,8 +1,10 @@
 <template>
     <NConfigProvider :theme="get_theme()" inlineThemeDisabled>
-        <NNotificationProvider>
-            <NModalProvider><slot /></NModalProvider>
-        </NNotificationProvider>
+        <NLoadingBarProvider>
+            <NNotificationProvider>
+                <NModalProvider><slot /></NModalProvider>
+            </NNotificationProvider>
+        </NLoadingBarProvider>
     </NConfigProvider>
 </template>
 

@@ -1,5 +1,9 @@
 <template>
-    <NLayout position="absolute" content-style="padding: 6px;">
+    <NLayout
+        position="absolute"
+        :native-scrollbar="false"
+        content-style="padding: 6px;"
+    >
         <NModal v-model:show="query_select_show">
             <NCard style="width: 400px" title="Query Select">
                 <NForm>
@@ -30,18 +34,18 @@
         </NModal>
         <NTabs type="segment" animated>
             <NTabPane name="table" tab="Table">
-                <ResultTable :result="result" />
+                <ResultTable :data="result" />
             </NTabPane>
             <NTabPane name="chart" tab="Chart">
-                <ResultChart :result="result" />
+                <ResultChart :interval="query_value.interval" :data="result" />
             </NTabPane>
         </NTabs>
-        <NTooltip style="z-index: 1000">
+        <NTooltip>
             <template #trigger
                 ><NFloatButton
                     @click="toggleRunningState"
                     :top="112"
-                    :right="10"
+                    :right="40"
                 >
                     <NIcon>
                         <Stop v-if="is_running" />
@@ -49,14 +53,17 @@
                     </NIcon> </NFloatButton
             ></template>
             Last Update Time: {{ last_update_time }}
+            <br />
+            Auto Refresh Value: {{ query_value.auto_refresh_time }} Seconds
         </NTooltip>
+        <NBackTop />
     </NLayout>
 </template>
 
 <script setup lang="ts">
 import { Play, Stop } from "@vicons/ionicons5";
-import { useNotification } from "naive-ui";
-import { ref } from "vue";
+import { useLoadingBar, useNotification } from "naive-ui";
+import { onUnmounted, ref } from "vue";
 import Screener from "../../../utils/api/screener";
 import ResultTable from "./result_table.vue";
 import ResultChart from "./result_chart.vue";
@@ -76,6 +83,7 @@ interface ScreenerItem {
 }
 
 const notification = useNotification();
+const loadingBar = useLoadingBar();
 const screener = new Screener(notification);
 const result = ref<ScreenerItem[]>([]);
 const last_update_time = ref<string>("");
@@ -87,6 +95,8 @@ const query_value = ref({
     auto_refresh_time: 10,
     interval: "i1",
 });
+
+onUnmounted(() => clearTimeout(refresh_timeout.value!));
 
 function toggleRunningState() {
     if (is_running.value) {
@@ -111,9 +121,11 @@ function model_confirm() {
 }
 
 async function start_query() {
+    loadingBar.start();
     result.value = (await screener.Finviz(
         query_value.value.parameter_url!,
     )) as ScreenerItem[];
+    loadingBar.finish();
     last_update_time.value = new Date().toLocaleString();
     if (is_running.value) {
         refresh_timeout.value = setTimeout(
