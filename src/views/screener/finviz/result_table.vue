@@ -11,6 +11,8 @@ import { NText, type DataTableColumns } from "naive-ui";
 import type { PropType } from "vue";
 import { h, reactive } from "vue";
 
+const none = "--";
+
 interface ScreenerItem {
     "No.": number;
     Ticker: string;
@@ -72,7 +74,7 @@ function create_columns(): DataTableColumns<ScreenerItem> {
             render(row) {
                 const marketCap = row["Market Cap"];
                 if (marketCap == undefined) {
-                    return "—";
+                    return none;
                 } else {
                     return `${marketCap}M`;
                 }
@@ -82,14 +84,14 @@ function create_columns(): DataTableColumns<ScreenerItem> {
             title: "P/E",
             key: "P/E",
             render(row) {
-                return row["P/E"]?.toFixed(2) ?? "—";
+                return row["P/E"]?.toFixed(2) ?? none;
             },
         },
         {
             title: "Price",
             key: "Price",
             render(row) {
-                return row.Price?.toFixed(2) ?? "—";
+                return row.Price?.toFixed(2) ?? none;
             },
         },
         {

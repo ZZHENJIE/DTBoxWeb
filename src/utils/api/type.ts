@@ -62,12 +62,14 @@ export class API {
         title: `${error_code}:${errType}`,
         content: errMsg,
         meta,
+        duration: 2000,
       });
     } else {
       this.notification.error({
         title: `${error_code}:Fetch Error`,
         content: error,
         meta,
+        duration: 2000,
       });
     }
   }
